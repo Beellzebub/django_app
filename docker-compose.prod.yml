@@ -6,6 +6,10 @@ services:
       context: .
       dockerfile: Dockerfile.prod
     container_name: django
+    volumes:
+      - type: volume
+        source: static_volume
+        target: /home/app/web/staticfiles
     command: gunicorn webapp.wsgi:application -b 0.0.0.0:8000
     expose:
       - 8000
@@ -19,6 +23,10 @@ services:
       context: ./nginx
       dockerfile: Dockerfile
     container_name: nginx
+    volumes:
+      - type: volume
+        source: static_volume
+        target: /home/app/web/staticfiles
     depends_on:
       - web
     ports:
@@ -26,6 +34,10 @@ services:
   postgres:
     image: postgres:13.0-alpine
     container_name: postgres
+    volumes:
+      - type: volume
+        source: postgres_data
+        target: /var/lib/postgresql/data/
     environment:
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=admin_pass
@@ -33,3 +45,6 @@ services:
   redis:
     image: redis:alpine
     container_name: redis
+volumes:
+  postgres_data:
+  static_volume:
