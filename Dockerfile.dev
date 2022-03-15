@@ -8,12 +8,20 @@ WORKDIR /usr/src/app/
 
 COPY ./code/requirements.txt .
 
+RUN apk add build-base jpeg-dev zlib-dev
+ENV LIBRARY_PATH=/lib:/usr/lib
+
 RUN pip install --upgrade pip && \
+    pip install wheel && \
     pip install --no-cache-dir -r requirements.txt && \
     apk update && \
     apk add postgresql-dev gcc python3-dev musl-dev
 
 COPY ./scripts/entrypoint.dev.sh .
 COPY ./code .
+
+# For Alpine Linux:
+RUN apk add dos2unix
+RUN dos2unix ./entrypoint.dev.sh
 
 ENTRYPOINT ["./entrypoint.dev.sh"]
