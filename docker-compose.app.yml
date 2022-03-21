@@ -10,4 +10,4 @@ services:
     ports:
       - "8000:8000"
     env_file:
-      - env_var/.env.app
+      - code/env_var/.env.app
