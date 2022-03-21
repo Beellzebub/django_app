@@ -1,0 +1,5 @@
+code/.idea
+code/.git
+code/.gitignore
+code/db.sqlite3
+code/env_var
