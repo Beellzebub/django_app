@@ -1,3 +1,0 @@
-DEBUG=1
-SECRET_KEY=app_pass
-DJANGO_ALLOWED_HOSTS=127.0.0.1 localhost [::1]
