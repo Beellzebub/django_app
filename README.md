@@ -30,8 +30,8 @@
 * Создается четыре контейнера: django, postgres, redis, nginx.
 * Создается том для хранения данных PostgreSQL: postgres_prod_data (/var/lib/postgresql/data).
 * Создается том для хранения данных Redis: redis_prod_data (/data).
-* Создается том для хранения статических файлов: static_volume (/usr/src/app/staticfiles).
-* Создается том для хранения медиафайлов: media_volume (/usr/src/app/mediafiles).
+* Создается том для хранения статических файлов: static_volume (/usr/src/app/static).
+* Создается том для хранения медиафайлов: media_volume (/usr/src/app/blog/media).
 * При запуске контейнера django выполняются:
     * migrate
     * collectstatic
