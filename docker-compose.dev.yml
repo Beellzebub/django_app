@@ -19,14 +19,17 @@ services:
     container_name: postgres
     volumes:
       - type: volume
-        source: postgres_data
-        target: /var/lib/postgresql/data/
-    environment:
-      - POSTGRES_USER=dev
-      - POSTGRES_PASSWORD=dev_pass
-      - POSTGRES_DB=dev_db
+        source: postgres_dev_data
+        target: /var/lib/postgresql/data
+    env_file:
+      - code/env_var/.env.dev.db
   redis:
     image: redis:alpine
     container_name: redis
+    volumes:
+      - type: volume
+        source: redis_dev_data
+        target: /data
 volumes:
-  postgres_data:
+  postgres_dev_data:
+  redis_dev_data:
