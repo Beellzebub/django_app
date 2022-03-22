@@ -9,10 +9,10 @@ services:
     volumes:
       - type: volume
         source: static_volume
-        target: /usr/src/app/staticfiles
+        target: /usr/src/app/static
       - type: volume
         source: media_volume
-        target: /usr/src/app/mediafiles
+        target: /usr/src/app/blog/media
     command: gunicorn memes.wsgi:application -b 0.0.0.0:8000
     expose:
       - 8000
@@ -29,10 +29,10 @@ services:
     volumes:
       - type: volume
         source: static_volume
-        target: /usr/src/app/staticfiles
+        target: /usr/src/app/static
       - type: volume
         source: media_volume
-        target: /usr/src/app/mediafiles
+        target: /usr/src/app/blog/media
     depends_on:
       - web
     ports:
