@@ -10,8 +10,19 @@ while [ -n "$1" ]; do
   shift
 done
 
-cd cd /opt/memes || exit
-docker-compose -f "$yml" down
-docker rm "$(docker ps -a -q)"
-docker-compose -f "$yml" up --build -d
-docker rmi "$(docker images -f dangling=true -q)"
+if [ -n "$yml" ]; then
+  echo "Stop containers."
+  cd /opt/memes || exit
+  docker-compose -f "$yml" down
+
+  echo "Delete containers."
+  docker rm "$(docker ps -a -q)"
+
+  echo "Start application."
+  docker-compose -f "$yml" up --build -d
+
+  echo "Delete old containers ."
+  docker rmi "$(docker images -f dangling=true -q)"
+else
+  echo "Launch option not specified."
+fi
