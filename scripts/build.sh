@@ -11,17 +11,17 @@ while [ -n "$1" ]; do
 done
 
 if [ -n "$yml" ]; then
-  echo "Stop containers."
+  echo "Stop containers:"
   cd /opt/memes || exit
   docker-compose -f "$yml" down
 
-  echo "Delete containers."
+  echo "Delete containers:"
   docker rm "$(docker ps -a -q)"
 
-  echo "Start application."
+  echo "Start application:"
   docker-compose -f "$yml" up --build -d
 
-  echo "Delete old containers ."
+  echo "Delete old containers:"
   docker rmi "$(docker images -f dangling=true -q)"
 else
   echo "Launch option not specified."

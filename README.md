@@ -28,6 +28,8 @@
 * Создается три контейнера: django, postgres, redis.
 * Создается том для хранения данных PostgreSQL: postgres_dev_data (/var/lib/postgresql/data).
 * Создается том для хранения данных Redis: redis_dev_data (/data).
+* Создается том для хранения статических файлов: static_volume (/usr/src/app/static).
+* Создается том для хранения медиафайлов: media_volume (/usr/src/app/blog/media).
 * При запуске контейнера django выполняются:
     * migrate
     * runserver 0.0.0.0:8000
@@ -84,18 +86,18 @@
 #### 3. Support:
 * Установка docker и docker-compose:
 
-  `$ ./opt/memes/scripts/install.sh`
+  `$ ./install.sh`
 
 
 * Обновление кода проекта:
 
-  `$ sudo ./opt/memes/scripts/pull.sh`
+  `$ sudo ./pull.sh`
 
 
 * Запуск или перезапуск контейнеров соответствующего приложения:
 
-  `$ sudo ./opt/memes/scripts/build.sh --app`
+  `$ sudo ./build.sh --app`
 
-  `$ sudo ./opt/memes/scripts/build.sh --dev`
+  `$ sudo ./build.sh --dev`
 
-  `$ sudo ./opt/memes/scripts/build.sh --prod`
+  `$ sudo ./build.sh --prod`
