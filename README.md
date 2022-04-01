@@ -1,5 +1,15 @@
-### django application
+#### 1. Install:
+`$ sudo git clone https://github.com/Beellzebub/django_app /opt/memes`
 
+`$ sudo chmod +x /opt/memes/scripts/*`
+
+`$ sudo git clone git@github.com:Petrovich-Z/memasnica.git /opt/memes/code`
+
+`Скопировать .env файлы в /opt/memes/code/env_var/`
+
+`$ sudo chmod +rx /opt/memes/code/env_var/.*`
+
+#### 2. Run:
 Есть три варианта запуска проложения:
 
 `$ docker-compose -f docker-compose.app.yml up --build`
@@ -70,3 +80,22 @@
 * Удалить не используемые образы:
 
   `$ docker rmi $(docker images -f dangling=true -q)`
+
+#### 3. Support:
+* Установка docker и docker-compose:
+
+  `$ ./opt/memes/scripts/install.sh`
+
+
+* Обновление кода проекта:
+
+  `$ sudo ./opt/memes/scripts/pull.sh`
+
+
+* Запуск или перезапуск контейнеров соответствующего приложения:
+
+  `$ sudo ./opt/memes/scripts/build.sh --app`
+
+  `$ sudo ./opt/memes/scripts/build.sh --dev`
+
+  `$ sudo ./opt/memes/scripts/build.sh --prod`
