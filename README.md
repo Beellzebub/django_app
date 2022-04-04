@@ -12,7 +12,7 @@
 #### 2. Run:
 Есть три варианта запуска проложения:
 
-`$ docker-compose -f docker-compose.app.yml up -p app --build`
+`$ docker-compose -f docker-compose.app.yml -p app up --build`
 
 * http://127.0.0.1:80/
 * Создается один контейнер: django.
@@ -24,7 +24,7 @@
     * code/env_var/.env.app
 
 
-`$ docker-compose -f docker-compose.dev.yml up -p dev --build`
+`$ docker-compose -f docker-compose.dev.yml -p dev up --build`
 
 * http://127.0.0.1:8000/
 * Создается три контейнера: django, postgres, redis.
@@ -39,7 +39,7 @@
     * code/env_var/.env.dev
     * code/env_var/.env.dev.db
   
-`$ docker-compose -f docker-compose.prod.yml up -p prod --build`
+`$ docker-compose -f docker-compose.prod.yml -p prod up --build`
 
 * http://127.0.0.1:88/
 * Создается четыре контейнера: django, postgres, redis, nginx.
@@ -73,11 +73,11 @@
 
 * Запустить соответствующее приложение:
 
-  `$ docker-compose -f docker-compose.app.yml up -p app --build`
+  `$ docker-compose -f docker-compose.app.yml -p app up --build`
 
-  `$ docker-compose -f docker-compose.dev.yml up -p dev --build`
+  `$ docker-compose -f docker-compose.dev.yml -p dev up --build`
 
-  `$ docker-compose -f docker-compose.prod.yml up -p prod --build`
+  `$ docker-compose -f docker-compose.prod.yml -p prod up --build`
 
 
 * Удалить не используемые образы:

@@ -9,3 +9,5 @@ echo "Start git pull application:"
 cd /opt/memes/code || exit
 git reset --hard
 git pull
+
+chmod +x /opt/memes/scripts/*
