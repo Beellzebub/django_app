@@ -12,8 +12,9 @@
 #### 2. Run:
 Есть три варианта запуска проложения:
 
-`$ docker-compose -f docker-compose.app.yml up --build`
+`$ docker-compose -f docker-compose.app.yml up -p app --build`
 
+* http://127.0.0.1:80/
 * Создается один контейнер: django.
 * При запуске контейнера django выполняются:
     * migrate
@@ -23,8 +24,9 @@
     * code/env_var/.env.app
 
 
-`$ docker-compose -f docker-compose.dev.yml up --build`
+`$ docker-compose -f docker-compose.dev.yml up -p dev --build`
 
+* http://127.0.0.1:8000/
 * Создается три контейнера: django, postgres, redis.
 * Создается том для хранения данных PostgreSQL: postgres_dev_data (/var/lib/postgresql/data).
 * Создается том для хранения данных Redis: redis_dev_data (/data).
@@ -37,8 +39,9 @@
     * code/env_var/.env.dev
     * code/env_var/.env.dev.db
   
-`$ docker-compose -f docker-compose.prod.yml up --build`
+`$ docker-compose -f docker-compose.prod.yml up -p prod --build`
 
+* http://127.0.0.1:88/
 * Создается четыре контейнера: django, postgres, redis, nginx.
 * Создается том для хранения данных PostgreSQL: postgres_prod_data (/var/lib/postgresql/data).
 * Создается том для хранения данных Redis: redis_prod_data (/data).
@@ -51,18 +54,16 @@
 * Используются следующие env файлы:
     * code/env_var/.env.prod
     * code/env_var/.env.prod.db
-
-Для избежания конфликтов рекомендуется не запускать несколько yml манифестов.
     
-При изменении варианта (app, dev, prod) запуска приложения необходимо:
+Для перезапуска приложения необходимо:
 
 * Остановить соответствующее приложение:
    
-  `$ docker-compose -f docker-compose.app.yml down`
+  `$ docker-compose -f docker-compose.app.yml -p app down`
 
-  `$ docker-compose -f docker-compose.dev.yml down`
+  `$ docker-compose -f docker-compose.dev.yml -p dev down`
 
-  `$ docker-compose -f docker-compose.prod.yml down`
+  `$ docker-compose -f docker-compose.prod.yml -p prod down`
 
 
 * Удалить старые контейнеры:
@@ -72,11 +73,11 @@
 
 * Запустить соответствующее приложение:
 
-  `$ docker-compose -f docker-compose.app.yml up --build`
+  `$ docker-compose -f docker-compose.app.yml up -p app --build`
 
-  `$ docker-compose -f docker-compose.dev.yml up --build`
+  `$ docker-compose -f docker-compose.dev.yml up -p dev --build`
 
-  `$ docker-compose -f docker-compose.prod.yml up --build`
+  `$ docker-compose -f docker-compose.prod.yml up -p prod --build`
 
 
 * Удалить не используемые образы:

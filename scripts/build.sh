@@ -2,24 +2,24 @@
 
 while [ -n "$1" ]; do
   case "$1" in
-    --app) shift; yml="docker-compose.app.yml";;
-    --dev) shift; yml="docker-compose.dev.yml";;
-    --prod) shift; yml="docker-compose.prod.yml";;
+    --app) shift; opt="-f docker-compose.app.yml -p app";;
+    --dev) shift; opt="-f docker-compose.dev.yml -p dev";;
+    --prod) shift; opt="-f docker-compose.prod.yml -p prod";;
     *) echo "Unknown argument: $1";;
   esac
   shift
 done
 
-if [ -n "$yml" ]; then
+if [ -n "$opt" ]; then
   echo "Stop containers:"
   cd /opt/memes || exit
-  docker-compose -f "$yml" down
+  docker-compose "$opt" down
 
   echo "Delete containers:"
   docker rm "$(docker ps -a -q)"
 
   echo "Start application:"
-  docker-compose -f "$yml" up --build -d
+  docker-compose "$opt" up --build -d
 
   echo "Delete old containers:"
   docker rmi "$(docker images -f dangling=true -q)"

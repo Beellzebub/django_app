@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.prod
-    container_name: django
+    container_name: django_prod
     volumes:
       - type: volume
         source: static_volume
@@ -25,7 +25,7 @@ services:
     build:
       context: ./nginx
       dockerfile: Dockerfile
-    container_name: nginx
+    container_name: nginx_prod
     volumes:
       - type: volume
         source: static_volume
@@ -36,25 +36,26 @@ services:
     depends_on:
       - web
     ports:
-      - "8000:80"
+      - "88:80"
   postgres:
     image: postgres:13.0-alpine
-    container_name: postgres
+    container_name: postgres_prod
     volumes:
       - type: volume
-        source: postgres_prod_data
+        source: postgres_data
         target: /var/lib/postgresql/data/
     env_file:
       - code/env_var/.env.prod.db
   redis:
     image: redis:alpine
-    container_name: redis
+    container_name: redis_prod
     volumes:
       - type: volume
-        source: redis_prod_data
+        source: redis_data
         target: /data
+
 volumes:
-  postgres_prod_data:
-  redis_prod_data:
+  postgres_data:
+  redis_data:
   static_volume:
   media_volume:

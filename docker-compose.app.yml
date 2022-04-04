@@ -5,9 +5,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.app
-    container_name: django
+    container_name: django_app
     command: python manage.py runserver 0.0.0.0:8000
     ports:
-      - "8000:8000"
+      - "80:8000"
     env_file:
       - code/env_var/.env.app
