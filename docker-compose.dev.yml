@@ -8,9 +8,6 @@ services:
     container_name: django_dev
     volumes:
       - type: volume
-        source: static_volume
-        target: /usr/src/app/static
-      - type: volume
         source: media_volume
         target: /usr/src/app/blog/media
     command: python manage.py runserver 0.0.0.0:8000
@@ -41,5 +38,4 @@ services:
 volumes:
   postgres_data:
   redis_data:
-  static_volume:
   media_volume:
