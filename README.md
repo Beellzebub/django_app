@@ -27,10 +27,11 @@
 `$ docker-compose -f docker-compose.dev.yml -p dev up --build`
 
 * http://127.0.0.1:8000/
-* Создается три контейнера: django, postgres, redis.
+* Создается четыре контейнера: django, postgres, redis, elasticsearch.
 * Создается том для хранения данных PostgreSQL: postgres_dev_data (/var/lib/postgresql/data).
 * Создается том для хранения данных Redis: redis_dev_data (/data).
 * Создается том для хранения медиафайлов: media_volume (/usr/src/app/blog/media).
+* Создается том для хранения данных elasticsearch: elasticsearch_data (/usr/share/elasticsearch/data).
 * При запуске контейнера django выполняются:
     * migrate
     * runserver 0.0.0.0:8000
@@ -41,11 +42,12 @@
 `$ docker-compose -f docker-compose.prod.yml -p prod up --build`
 
 * http://127.0.0.1:88/
-* Создается четыре контейнера: django, postgres, redis, nginx.
+* Создается пять контейнеров: django, postgres, redis, nginx, elasticsearch.
 * Создается том для хранения данных PostgreSQL: postgres_prod_data (/var/lib/postgresql/data).
 * Создается том для хранения данных Redis: redis_prod_data (/data).
 * Создается том для хранения статических файлов: static_volume (/usr/src/app/static).
 * Создается том для хранения медиафайлов: media_volume (/usr/src/app/blog/media).
+* Создается том для хранения данных elasticsearch: elasticsearch_data (/usr/share/elasticsearch/data).
 * При запуске контейнера django выполняются:
     * migrate
     * collectstatic
