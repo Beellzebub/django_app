@@ -21,7 +21,8 @@ services:
     depends_on:
       - postgres
       - redis
-      - elasticsearch
+      - es
+
   nginx:
     build:
       context: ./nginx
@@ -38,6 +39,7 @@ services:
       - web
     ports:
       - "88:80"
+
   postgres:
     image: postgres:13.0-alpine
     container_name: postgres_prod
@@ -47,6 +49,7 @@ services:
         target: /var/lib/postgresql/data/
     env_file:
       - code/env_var/.env.prod.db
+
   redis:
     image: redis:alpine
     container_name: redis_prod
@@ -54,18 +57,21 @@ services:
       - type: volume
         source: redis_data
         target: /data
-  elasticsearch:
-    image: elasticsearch:5.6.16-alpine
-    container_name: search_dev
+
+  es:
+    image: elasticsearch:7.8.1
+    container_name: es_prod
+    environment:
+      - discovery.type=single-node
     volumes:
       - type: volume
-        source: elasticsearch_data
+        source: es_data
         target: /usr/share/elasticsearch/data
     ports:
       - "9200:9200"
 
 volumes:
-  elasticsearch_data:
+  es_data:
   postgres_data:
   redis_data:
   static_volume:
