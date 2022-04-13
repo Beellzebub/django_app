@@ -5,36 +5,34 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.prod
-    container_name: django_prod
+    container_name: ch_prod
     volumes:
       - type: volume
         source: static_volume
         target: /usr/src/app/static
       - type: volume
         source: media_volume
-        target: /usr/src/app/blog/media
-    command: gunicorn memes.wsgi:application -b 0.0.0.0:8000
+        target: /usr/src/app/media
+    command: gunicorn career.wsgi:application -b 0.0.0.0:8000
     expose:
       - 8000
     env_file:
       - code/env_var/.env.prod
     depends_on:
       - postgres
-      - redis
-      - es
 
   nginx:
     build:
       context: ./nginx
       dockerfile: Dockerfile
-    container_name: nginx_prod
+    container_name: ch_nginx_prod
     volumes:
       - type: volume
         source: static_volume
         target: /usr/src/app/static
       - type: volume
         source: media_volume
-        target: /usr/src/app/blog/media
+        target: /usr/src/app/media
     depends_on:
       - web
     ports:
@@ -42,7 +40,7 @@ services:
 
   postgres:
     image: postgres:13.0-alpine
-    container_name: postgres_prod
+    container_name: ch_postgres_prod
     volumes:
       - type: volume
         source: postgres_data
@@ -50,29 +48,7 @@ services:
     env_file:
       - code/env_var/.env.prod.db
 
-  redis:
-    image: redis:alpine
-    container_name: redis_prod
-    volumes:
-      - type: volume
-        source: redis_data
-        target: /data
-
-  es:
-    image: elasticsearch:7.8.1
-    container_name: es_prod
-    environment:
-      - discovery.type=single-node
-    volumes:
-      - type: volume
-        source: es_data
-        target: /usr/share/elasticsearch/data
-    ports:
-      - "9200:9200"
-
 volumes:
-  es_data:
   postgres_data:
-  redis_data:
   static_volume:
   media_volume:
