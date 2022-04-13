@@ -11,7 +11,7 @@ COPY ./code/requirements.txt .
 COPY ./scripts/entrypoint.prod.sh .
 
 RUN apk update && \
-    apk add postgresql-dev gcc python3-dev musl-dev build-base jpeg-dev zlib-dev tk dos2unix && \
+    apk add postgresql-dev gcc python3-dev libffi-dev musl-dev build-base jpeg-dev zlib-dev tk dos2unix && \
     pip install --upgrade pip && \
     pip install --no-cache-dir -r requirements.txt && \
     dos2unix ./entrypoint.prod.sh

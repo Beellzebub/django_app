@@ -11,7 +11,7 @@ COPY ./code/requirements.txt .
 COPY ./scripts/entrypoint.app.sh .
 
 RUN apk update && \
-    apk add build-base jpeg-dev zlib-dev tk && \
+    apk add build-base jpeg-dev zlib-dev tk python3-dev libffi-dev && \
     pip install --upgrade pip && \
     pip install --no-cache-dir -r requirements.txt && \
     dos2unix ./entrypoint.app.sh
