@@ -18,11 +18,14 @@
 * Создается один контейнер: django.
 * При запуске контейнера django выполняются:
     * migrate
+    * search_index --rebuild
     * создание /usr/src/app/db.sqlite3
     * runserver 0.0.0.0:8000
 * Используются следующие env файлы:
     * code/env_var/.env.app
-
+* На локальной машине необходимо запустить:
+    * redis v.6 по адресу http://localhost:6379
+    * elasticsearch v.7 по адресу http://localhost:9200
 
 `$ docker-compose -f docker-compose.dev.yml -p dev up --build`
 
@@ -34,6 +37,7 @@
 * Создается том для хранения данных elasticsearch: elasticsearch_data (/usr/share/elasticsearch/data).
 * При запуске контейнера django выполняются:
     * migrate
+    * search_index --rebuild
     * runserver 0.0.0.0:8000
 * Используются следующие env файлы:
     * code/env_var/.env.dev
@@ -50,6 +54,7 @@
 * Создается том для хранения данных elasticsearch: elasticsearch_data (/usr/share/elasticsearch/data).
 * При запуске контейнера django выполняются:
     * migrate
+    * search_index --rebuild
     * collectstatic
     * gunicorn memes.wsgi:application -b 0.0.0.0:8000
 * Используются следующие env файлы:

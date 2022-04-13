@@ -1,16 +1,21 @@
 #!/bin/sh
 
-if [ "$DATABASE" = "postgres" ]
-then
-    echo "Waiting for postgres..."
+ES_HOST=$(echo "$ELASTICSEARCH_DSL_HOSTS" | cut -d ":" -f 1)
+ES_PORT=$(echo "$ELASTICSEARCH_DSL_HOSTS" | cut -d ":" -f 2)
 
-    while ! nc -z $SQL_HOST $SQL_PORT; do
-      sleep 0.1
-    done
+while ! nc -z "$SQL_HOST" "$SQL_PORT"; do
+  sleep 0.1
+done
+echo "PostgreSQL started."
 
-    echo "PostgreSQL started"
-fi
 
-python manage.py migrate --noinput
+while ! nc -z "$ES_HOST" "$ES_PORT"; do
+  sleep 0.1
+done
+echo "Elasticsearch started."
+
+
+python3 manage.py migrate --noinput
+python3 manage.py search_index --rebuild -f
 
 exec "$@"
