@@ -1,13 +1,13 @@
 #!/bin/bash
 
 echo "Start git pull docker config:"
-cd /opt/memes || exit
+cd /opt/careerhub || exit
 git reset --hard
 git pull
 
 echo "Start git pull application:"
-cd /opt/memes/code || exit
+cd /opt/careerhub/code || exit
 git reset --hard
 git pull
 
-chmod +x /opt/memes/scripts/*
+chmod +x /opt/careerhub/scripts/*
