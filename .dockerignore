@@ -1,5 +1,9 @@
-code/.idea
-code/.git
-code/.gitignore
-code/db.sqlite3
-code/env_var
+code/backend/.idea
+code/backend/.git
+code/backend/.gitignore
+code/backend/db.sqlite3
+code/backend/env_var
+
+code/frontend/.idea
+code/frontend/.gitignore
+code/frontend/README.md

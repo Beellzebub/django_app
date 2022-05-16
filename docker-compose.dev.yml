@@ -1,11 +1,11 @@
 version: '3.3'
 
 services:
-  web:
+  backend:
     build:
       context: .
-      dockerfile: Dockerfile.dev
-    container_name: ch_dev
+      dockerfile: backend/dockerfile/development
+    container_name: ch_django_dev
     volumes:
       - type: volume
         source: media_volume
@@ -14,7 +14,7 @@ services:
     ports:
       - "8000:8000"
     env_file:
-      - code/env_var/.env.dev
+      - code/backend/env_var/.env.dev
     depends_on:
       - postgres
 
@@ -26,7 +26,18 @@ services:
         source: postgres_data
         target: /var/lib/postgresql/data
     env_file:
-      - code/env_var/.env.dev.db
+      - code/backend/env_var/.env.dev.db
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    container_name: ch_node_dev
+    command: npm start
+    ports:
+      - "80:3000"
+    depends_on:
+      - backend
 
 volumes:
   postgres_data:

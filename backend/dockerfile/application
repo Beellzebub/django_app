@@ -7,8 +7,8 @@ ENV LIBRARY_PATH=/lib:/usr/lib
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app/
 
-COPY ./code/requirements.txt .
-COPY ./scripts/entrypoint.app.sh .
+COPY ./code/backend/requirements.txt .
+COPY ./backend/sh/entrypoint.app.sh .
 
 RUN apk update && \
     apk add build-base jpeg-dev zlib-dev tk python3-dev libffi-dev && \
@@ -16,6 +16,6 @@ RUN apk update && \
     pip install --no-cache-dir -r requirements.txt && \
     dos2unix ./entrypoint.app.sh
 
-COPY ./code .
+COPY ./code/backend/ .
 
 ENTRYPOINT ["./entrypoint.app.sh"]

@@ -7,16 +7,15 @@ ENV LIBRARY_PATH=/lib:/usr/lib
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app/
 
-COPY ./code/requirements.txt .
-COPY ./scripts/entrypoint.dev.sh .
+COPY ./code/backend/requirements.txt .
+COPY ./backend/sh/entrypoint.prod.sh .
 
 RUN apk update && \
     apk add postgresql-dev gcc python3-dev libffi-dev musl-dev build-base jpeg-dev zlib-dev tk dos2unix && \
     pip install --upgrade pip && \
-    pip install wheel && \
     pip install --no-cache-dir -r requirements.txt && \
-    dos2unix ./entrypoint.dev.sh
+    dos2unix ./entrypoint.prod.sh
 
-COPY ./code .
+COPY ./code/backend/ .
 
-ENTRYPOINT ["./entrypoint.dev.sh"]
+ENTRYPOINT ["./entrypoint.prod.sh"]

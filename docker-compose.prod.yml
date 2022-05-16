@@ -1,11 +1,11 @@
 version: '3.3'
 
 services:
-  web:
+  backend:
     build:
       context: .
-      dockerfile: Dockerfile.prod
-    container_name: ch_prod
+      dockerfile: backend/dockerfile/production
+    container_name: ch_django_prod
     volumes:
       - type: volume
         source: static_volume
@@ -17,7 +17,7 @@ services:
     expose:
       - 8000
     env_file:
-      - code/env_var/.env.prod
+      - code/backend/env_var/.env.prod
     depends_on:
       - postgres
 
@@ -34,9 +34,9 @@ services:
         source: media_volume
         target: /usr/src/app/media
     depends_on:
-      - web
+      - backend
     ports:
-      - "88:80"
+      - "80:80"
 
   postgres:
     image: postgres:13.0-alpine
@@ -46,7 +46,18 @@ services:
         source: postgres_data
         target: /var/lib/postgresql/data/
     env_file:
-      - code/env_var/.env.prod.db
+      - code/backend/env_var/.env.prod.db
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    container_name: ch_node_prod
+    command: npm start
+    ports:
+      - "80:3000"
+    depends_on:
+      - backend
 
 volumes:
   postgres_data:
