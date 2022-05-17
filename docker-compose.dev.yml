@@ -18,7 +18,7 @@ services:
     build:
       context: .
       dockerfile: nginx/dockerfiles/development
-    container_name: ch_nginx_prod
+    container_name: ch_nginx_dev
     volumes:
       - type: volume
         source: node_volume
@@ -27,7 +27,7 @@ services:
       - backend
       - frontend
     ports:
-      - "800:80"
+      - "8003:80"
 
   postgres:
     image: postgres:13.0-alpine

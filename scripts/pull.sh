@@ -16,3 +16,4 @@ git reset --hard
 git pull
 
 chmod +x /opt/careerhub/scripts/*
+chmod +x /opt/careerhub/backend/sh/*
