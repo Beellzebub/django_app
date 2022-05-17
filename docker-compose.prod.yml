@@ -38,7 +38,7 @@ services:
     depends_on:
       - web
     ports:
-      - "88:80"
+      - "8001:80"
 
   postgres:
     image: postgres:13.0-alpine
@@ -67,8 +67,6 @@ services:
       - type: volume
         source: es_data
         target: /usr/share/elasticsearch/data
-    ports:
-      - "9200:9200"
 
 volumes:
   es_data:
