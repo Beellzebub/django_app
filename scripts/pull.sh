@@ -6,7 +6,12 @@ git reset --hard
 git pull
 
 echo "Start git pull application:"
-cd /opt/careerhub/code || exit
+cd /opt/careerhub/code/backend || exit
+git reset --hard
+git pull
+
+echo "Start git pull application:"
+cd /opt/careerhub/code/frontend || exit
 git reset --hard
 git pull
 
