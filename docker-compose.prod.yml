@@ -9,10 +9,10 @@ services:
     volumes:
       - type: volume
         source: static_volume
-        target: /usr/src/app/django_static
+        target: /usr/src/app/static
       - type: volume
         source: media_volume
-        target: /usr/src/app/django_media
+        target: /usr/src/app/media
     command: gunicorn career.wsgi:application -b 0.0.0.0:8000
     expose:
       - 8000
@@ -29,10 +29,10 @@ services:
     volumes:
       - type: volume
         source: static_volume
-        target: /usr/src/app/django_static
+        target: /usr/src/app/static
       - type: volume
         source: media_volume
-        target: /usr/src/app/django_media
+        target: /usr/src/app/media
       - type: volume
         source: node_volume
         target: /usr/src/app/build
