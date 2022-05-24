@@ -20,7 +20,7 @@ services:
       dockerfile: nginx/dockerfiles/development
     container_name: ch_nginx_dev
     volumes:
-      - type: volume
+      - type: tmpfs
         source: node_volume
         target: /usr/src/app/build
     depends_on:
@@ -45,7 +45,7 @@ services:
       dockerfile: frontend/dockerfile/development
     container_name: ch_node_dev
     volumes:
-      - type: volume
+      - type: tmpfs
         source: node_volume
         target: /usr/src/app/build
     depends_on:

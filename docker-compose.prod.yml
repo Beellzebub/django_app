@@ -33,7 +33,7 @@ services:
       - type: volume
         source: media_volume
         target: /usr/src/app/media
-      - type: volume
+      - type: tmpfs
         source: node_volume
         target: /usr/src/app/build
     depends_on:
@@ -58,7 +58,7 @@ services:
       dockerfile: frontend/dockerfile/production
     container_name: ch_node_prod
     volumes:
-      - type: volume
+      - type: tmpfs
         source: node_volume
         target: /usr/src/app/build
     depends_on:
