@@ -63,6 +63,7 @@ services:
     container_name: es_prod
     environment:
       - discovery.type=single-node
+      - "ES_JAVA_OPTS=-Xms128m -Xmx128m"
     volumes:
       - type: volume
         source: es_data
